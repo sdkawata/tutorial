@@ -64,7 +64,9 @@ class Sample_Action_Delete extends Sample_ActionClass
         
         if ($this->af->validate() > 0) {
             // forward to error view (this is sample)
+	    if($this->session->isStart()){
             return 'userlist';
+}else{return "needlogin";}	
         }
         //$sample = $this->af->get('sample');
         
