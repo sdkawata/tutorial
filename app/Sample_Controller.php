@@ -21,6 +21,7 @@ require_once 'Sample_ActionClass.php';
 require_once 'Sample_ActionForm.php';
 require_once 'Sample_ViewClass.php';
 require_once 'Sample_UrlHandler.php';
+require_once "adodb/adodb.inc.php";
 
 /**
  *  Sample application Controller definition.
@@ -122,7 +123,7 @@ class Sample_Controller extends Ethna_Controller
         'class'         => 'Ethna_ClassFactory',
         'backend'       => 'Ethna_Backend',
         'config'        => 'Ethna_Config',
-        'db'            => 'Ethna_DB_PEAR',
+        'db'            => 'Ethna_DB_ADOdb',
         'error'         => 'Ethna_ActionError',
         'form'          => 'Sample_ActionForm',
         'i18n'          => 'Ethna_I18N',

@@ -2,7 +2,9 @@
   <p>Welcome to Ethnam!</p>
 {if $app.logined}
 {$app.username}-san, Good Morning.<a href="?action_logout=true"> log out </a>
+<a href="?action_userlist=true">user list</a>
 {else}
 <a href="?action_login=true"> log in</a>
+<a href="?action_signup=true"> sign up</a>
 {/if}
 

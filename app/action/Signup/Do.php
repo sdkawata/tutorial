@@ -1,21 +1,19 @@
-
-<?php
-
+><?php
 /**
- *  Login/Do.php
+ *  Signup/Do.php
  *
  *  @author     {$author}
  *  @package    Sample
  */
 
 /**
- *  login_do Form implementation.
+ *  signup_do Form implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Form_LoginDo extends Sample_ActionForm
+class Sample_Form_SignupDo extends Sample_ActionForm
 {
     /**
      *  @access protected
@@ -32,6 +30,7 @@ class Sample_Form_LoginDo extends Sample_ActionForm
 "type" =>VAR_TYPE_STRING,
 "required"=>true
 ]
+
 
    );
 
@@ -52,16 +51,16 @@ class Sample_Form_LoginDo extends Sample_ActionForm
 }
 
 /**
- *  login_do action implementation.
+ *  signup_do action implementation.
  *
  *  @author     {$author}
  *  @access     public
  *  @package    Sample
  */
-class Sample_Action_LoginDo extends Sample_ActionClass
+class Sample_Action_SignupDo extends Sample_ActionClass
 {
     /**
-     *  preprocess of login_do Action.
+     *  preprocess of signup_do Action.
      *
      *  @access public
      *  @return string    forward name(null: success.
@@ -69,33 +68,34 @@ class Sample_Action_LoginDo extends Sample_ActionClass
      */
     public function prepare()
     {
-
+        /**
         if ($this->af->validate() > 0) {
             // forward to error view (this is sample)
-            return 'login';
+            return 'error';
         }
         $sample = $this->af->get('sample');
-
+        */
         return null;
     }
 
     /**
-     *  login_do action implementation.
+     *  signup_do action implementation.
      *
      *  @access public
      *  @return string  forward name.
      */
     public function perform()
-    {
-    $um=new UserManager();
-    $result=$um->auth($this->backend,$this->af->get("mailaddress"),$this->af->get("password"));
+    {    $um=new UserManager();
+    $result=$um->signup($this->backend,$this->af->get("mailaddress"),$this->af->get("password"));
     if(Ethna::isError($result)){
 	$this->ae->addObject("loginError",$result);
-        return 'login';
+        return 'signup';
     }
 //login
 $this->session->start();
 $this->session->set("username",$this->af->get("mailaddress"));
     return "index";
+
+        //return 'signup_do';
     }
 }

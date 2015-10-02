@@ -1,2 +1,9 @@
 /vendor
+/tmp
+/lib
 *~
+\#*
+.*
+!/.gitignore
+!/.ethna
+!/www/.htaccess
