@@ -20,7 +20,35 @@ return null;
 }
 	return Ethna::raiseNotice("you password is wrong",E_SAMPLE_AUTH);
 }
+public function changepass($backend,$mailaddr,$oldpass,$newpass){
+$db=& $backend->getDB();
+if(Ethna::isError($db)){
+return $db;
+}
+$escaped=pg_escape_string($mailaddr);
+$list=$db->query("SELECT * FROM usernames WHERE id='{$escaped}'");
+if(Ethna::isError($list)){return $list;}
+$item=$list->fetchRow();
+if(!$item){
+	return Ethna::raiseNotice("you account is already deleted",E_SAMPLE_AUTH);
+}
+if($item['id']===$mailaddr && $item['passwd']===$oldpass){
+// change pass
+$res=$db->autoExecute("usernames",array("passwd"=>$newpass),"UPDATE","id='{$escaped}'");
+if(Ethna::isError($res)){return $res;}
+return null;
+}
+	return Ethna::raiseNotice('old password is wrong',E_SAMPLE_AUTH);
 
+}
+public function userdelete($backend,$mailaddr){
+$db=& $backend->getDB();
+if(Ethna::isError($db)){return $db;}
+$escaped=pg_escape_string($mailaddr);
+$list=$db->query("DELETE FROM usernames WHERE id=?",array($mailaddr));
+if(Ethna::isError($list)){return $list;}
+return null;
+}
 
 
 
