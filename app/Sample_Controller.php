@@ -21,7 +21,7 @@ require_once 'Sample_ActionClass.php';
 require_once 'Sample_ActionForm.php';
 require_once 'Sample_ViewClass.php';
 require_once 'Sample_UrlHandler.php';
-require_once "adodb/adodb.inc.php";
+require_once 'adodb/adodb.inc.php';
 
 /**
  *  Sample application Controller definition.
@@ -139,15 +139,7 @@ class Sample_Controller extends Ethna_Controller
      *  @var    array       filter definition.
      */
     protected $filter = array(
-        /*
-         *  TODO: when you use filter, write filter plugin name here.
-         *  (If you specify class name, Ethna reads filter class in
-         *   filter directory)
-         *
-         *  Example:
-         *
-         *  'ExecutionTime',
-         */
+       'ExectimeFilter'
     );
 
     /**#@-*/
