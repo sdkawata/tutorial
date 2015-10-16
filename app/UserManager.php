@@ -8,8 +8,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $escaped=pg_escape_string($mailaddr);
-        $list=$db->query("SELECT * FROM usernames WHERE id='{$escaped}'");
+        $list=$db->query("SELECT * FROM usernames WHERE id=?",array($mailaddr));
         if (Ethna::isError($list)) {
             return $list;
         }
@@ -29,8 +28,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $escaped=pg_escape_string($mailaddr);
-        $list=$db->query("SELECT * FROM usernames WHERE id='{$escaped}'");
+        $list=$db->query("SELECT * FROM usernames WHERE id=?",array($mailaddr));
         if (Ethna::isError($list)) {
             return $list;
         }
@@ -40,7 +38,7 @@ class UserManager
         }
         if ($item['id']===$mailaddr && $item['passwd']===$oldpass) {
             // change pass
-            $res=$db->autoExecute("usernames", array("passwd"=>$newpass), "UPDATE", "id='{$escaped}'");
+            $res=$db->autoExecute("usernames", array("passwd"=>$newpass), "UPDATE", "id='{$mailaddr}'");
             if (Ethna::isError($res)) {
                 return $res;
             }
@@ -54,7 +52,6 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $escaped=pg_escape_string($mailaddr);
         $list=$db->query("DELETE FROM usernames WHERE id=?", array($mailaddr));
         if (Ethna::isError($list)) {
             return $list;
@@ -71,8 +68,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $escaped=pg_escape_string($mailaddr);
-        $list=$db->query("SELECT * FROM usernames WHERE id='{$escaped}'");
+        $list=$db->query("SELECT * FROM usernames WHERE id=?",array($mailaddr));
         if (Ethna::isError($list)) {
             return $list;
         }
