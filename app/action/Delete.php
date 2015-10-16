@@ -61,7 +61,6 @@ class Sample_Action_Delete extends Sample_ActionClass
      */
     public function prepare()
     {
-        
         if ($this->af->validate() > 0) {
             // forward to error view (this is sample)
             if ($this->session->isStart()) {
@@ -70,8 +69,6 @@ class Sample_Action_Delete extends Sample_ActionClass
                 return "needlogin";
             }
         }
-        //$sample = $this->af->get('sample');
-        
         return null;
     }
 
@@ -87,10 +84,9 @@ class Sample_Action_Delete extends Sample_ActionClass
             return "needlogin";
         }
         $um=new UserManager();
-        $um=new UserManager();
         $result=$um->userdelete($this->backend, $this->af->get("mailaddress"));
         if (Ethna::isError($result)) {
-        //$this->ae->addObject("loginError",$result);
+            //$this->ae->addObject("loginError",$result);
             return 'userlist';
         }
 
