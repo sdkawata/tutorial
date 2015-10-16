@@ -1,4 +1,5 @@
-  <h2>User List</h2>
+<h2>User List</h2>
+
 {if count($errors)}
 <ul>
 {foreach from=$errors item=error}
@@ -7,7 +8,7 @@
 </ul>
 {/if}
 
-<table bordercolor="#333333" cellpadding="5"U>
+<table bordercolor="#333333" cellpadding="5">
 size:{$app.listsize}
 {foreach from=$app.userlist item=item}
 <tr>
