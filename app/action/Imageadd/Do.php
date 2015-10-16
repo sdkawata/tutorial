@@ -76,10 +76,10 @@ class Sample_Action_ImageaddDo extends Sample_ActionClass
     public function perform()
     {
         $file=$this->af->get('userfile');
-        if ($file['size']===0 || $file['tmp_name']===''){
+        if ($file['size']===0 || $file['tmp_name']==='') {
             return 'imageadd';
         }
-        rename($file['tmp_name'],'/home/vagrant/sample/www/uploaded/image.jpg');
+        rename($file['tmp_name'], '/home/vagrant/sample/www/uploaded/image.jpg');
         return 'index';
     }
 }

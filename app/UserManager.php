@@ -8,7 +8,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $list=$db->query("SELECT * FROM usernames WHERE id=?",array($mailaddr));
+        $list=$db->query("SELECT * FROM usernames WHERE id=?", array($mailaddr));
         if (Ethna::isError($list)) {
             return $list;
         }
@@ -28,7 +28,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $list=$db->query("SELECT * FROM usernames WHERE id=?",array($mailaddr));
+        $list=$db->query("SELECT * FROM usernames WHERE id=?", array($mailaddr));
         if (Ethna::isError($list)) {
             return $list;
         }
@@ -68,7 +68,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $list=$db->query("SELECT * FROM usernames WHERE id=?",array($mailaddr));
+        $list=$db->query("SELECT * FROM usernames WHERE id=?", array($mailaddr));
         if (Ethna::isError($list)) {
             return $list;
         }

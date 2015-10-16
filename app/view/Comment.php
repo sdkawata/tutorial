@@ -24,4 +24,3 @@ class Sample_View_Comment extends Sample_ViewClass
     {
     }
 }
-

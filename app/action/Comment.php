@@ -66,7 +66,9 @@ class Sample_Action_Comment extends Sample_ActionClass
      */
     public function perform()
     {
-        if (! $this->session->isStart()) {return 'needlogin';}
+        if (! $this->session->isStart()) {
+            return 'needlogin';
+        }
         return 'comment';
     }
 }
