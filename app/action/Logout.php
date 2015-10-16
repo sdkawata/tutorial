@@ -98,7 +98,7 @@ class Sample_Action_Logout extends Sample_ActionClass
      */
     public function perform()
     {
-$this->session->destroy();
+        $this->session->destroy();
         return 'index';
     }
 }

@@ -20,16 +20,16 @@ class Sample_Form_ChangepassDo extends Sample_ActionForm
      *  @var    array   form definition.
      */
     public $form = array(
-"oldpass"=>[
-"name"=>"oldpass",
-"type" =>VAR_TYPE_STRING,
-"required"=>true
-],
-"newpass"=>[
-"name"=>"newpass",
-"type" =>VAR_TYPE_STRING,
-"required"=>true
-]
+    "oldpass"=>[
+    "name"=>"oldpass",
+    "type" =>VAR_TYPE_STRING,
+    "required"=>true
+    ],
+    "newpass"=>[
+    "name"=>"newpass",
+    "type" =>VAR_TYPE_STRING,
+    "required"=>true
+    ]
     );
 
     /**
@@ -84,20 +84,20 @@ class Sample_Action_ChangepassDo extends Sample_ActionClass
      */
     public function perform()
     {
-if(!$this->session->isStart()){
-return "needlogin";
-}
-$id=$this->session->get("username");
-$um=new UserManager();
-    $result=$um->changepass($this->backend,$id,$this->af->get("oldpass"),$this->af->get("newpass"));
-    if(Ethna::isError($result)){
-	$this->ae->addObject("loginError",$result);
-        return 'changepass';
-    }
+        if (!$this->session->isStart()) {
+            return "needlogin";
+        }
+        $id=$this->session->get("username");
+        $um=new UserManager();
+        $result=$um->changepass($this->backend, $id, $this->af->get("oldpass"), $this->af->get("newpass"));
+        if (Ethna::isError($result)) {
+            $this->ae->addObject("loginError", $result);
+            return 'changepass';
+        }
 //login
 
 
-    return 'index';
+        return 'index';
 
     }
 }

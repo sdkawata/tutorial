@@ -53,5 +53,3 @@ class Sample_ActionClass extends Ethna_ActionClass
         return parent::perform();
     }
 }
-// }}}
-

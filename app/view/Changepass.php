@@ -24,4 +24,3 @@ class Sample_View_Changepass extends Sample_ViewClass
     {
     }
 }
-

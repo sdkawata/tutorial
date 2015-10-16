@@ -16,4 +16,4 @@
  *  Example:
  *  define('E_LOGIN_INVALID', 256);
  */
-define("E_SAMPLE_AUTH",-128);
+define("E_SAMPLE_AUTH", -128);

@@ -20,19 +20,19 @@ class Sample_Form_SignupDo extends Sample_ActionForm
      *  @var    array   form definition.
      */
     public $form = array(
-"mailaddress"=>[
-"name"=>"mailaddr",
-"type" =>VAR_TYPE_STRING,
-"required"=>true
-],
-"password"=>[
-"name"=>"passwd",
-"type" =>VAR_TYPE_STRING,
-"required"=>true
-]
+    "mailaddress"=>[
+    "name"=>"mailaddr",
+    "type" =>VAR_TYPE_STRING,
+    "required"=>true
+    ],
+    "password"=>[
+    "name"=>"passwd",
+    "type" =>VAR_TYPE_STRING,
+    "required"=>true
+    ]
 
 
-   );
+    );
 
     /**
      *  Form input value convert filter : sample
@@ -85,16 +85,17 @@ class Sample_Action_SignupDo extends Sample_ActionClass
      *  @return string  forward name.
      */
     public function perform()
-    {    $um=new UserManager();
-    $result=$um->signup($this->backend,$this->af->get("mailaddress"),$this->af->get("password"));
-    if(Ethna::isError($result)){
-	$this->ae->addObject("loginError",$result);
-        return 'signup';
-    }
+    {
+        $um=new UserManager();
+        $result=$um->signup($this->backend, $this->af->get("mailaddress"), $this->af->get("password"));
+        if (Ethna::isError($result)) {
+            $this->ae->addObject("loginError", $result);
+            return 'signup';
+        }
 //login
-$this->session->start();
-$this->session->set("username",$this->af->get("mailaddress"));
-    return "index";
+        $this->session->start();
+        $this->session->set("username", $this->af->get("mailaddress"));
+        return "index";
 
         //return 'signup_do';
     }

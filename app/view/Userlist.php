@@ -22,10 +22,9 @@ class Sample_View_Userlist extends Sample_ViewClass
      */
     public function preforward()
     {
-$um=new UserManager();
-$list=$um->userlist($this->backend);
-$this->af->setApp("userlist",$list);
-$this->af->setApp("listsize",count($list));
+        $um=new UserManager();
+        $list=$um->userlist($this->backend);
+        $this->af->setApp("userlist", $list);
+        $this->af->setApp("listsize", count($list));
     }
 }
-

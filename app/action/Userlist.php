@@ -98,10 +98,10 @@ class Sample_Action_Userlist extends Sample_ActionClass
      */
     public function perform()
     {
-    if($this->session->isStart()){
-        return 'userlist';
-}else{
-	return 'needlogin';
-}
+        if ($this->session->isStart()) {
+            return 'userlist';
+        } else {
+            return 'needlogin';
+        }
     }
 }

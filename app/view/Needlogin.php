@@ -24,4 +24,3 @@ class Sample_View_Needlogin extends Sample_ViewClass
     {
     }
 }
-

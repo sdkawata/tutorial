@@ -59,7 +59,5 @@ class Sample_ActionForm extends Ethna_ActionForm
     {
         return parent::_setFormDef();
     }
-
 }
 // }}}
-

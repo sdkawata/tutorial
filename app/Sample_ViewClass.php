@@ -40,7 +40,5 @@ class Sample_ViewClass extends Ethna_ViewClass
     protected function _setDefault($renderer)
     {
     }
-
 }
 // }}}
-

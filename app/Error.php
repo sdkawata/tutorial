@@ -1,3 +1,3 @@
 <?php
 
-define(E_SAMPLE_AUTH,-128)
+define(E_SAMPLE_AUTH, -128)

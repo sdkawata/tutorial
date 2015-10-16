@@ -22,12 +22,11 @@ class Sample_View_Index extends Sample_ViewClass
      */
     public function preforward()
     {
-    if($this->session->isStart()){
-$this->af->setApp("logined",true);
-$this->af->setApp("username",$this->session->get("username"));
-}else{
-$this->af->setApp("logined",false);
-}
+        if ($this->session->isStart()) {
+            $this->af->setApp("logined", true);
+            $this->af->setApp("username", $this->session->get("username"));
+        } else {
+            $this->af->setApp("logined", false);
+        }
     }
 }
-

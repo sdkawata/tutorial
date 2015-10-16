@@ -20,11 +20,11 @@ class Sample_Form_Delete extends Sample_ActionForm
      *  @var    array   form definition.
      */
     public $form = array(
-"mailaddress"=>[
-"name"=>"mailaddr",
-"type" =>VAR_TYPE_STRING,
-"required"=>true
-]
+    "mailaddress"=>[
+    "name"=>"mailaddr",
+    "type" =>VAR_TYPE_STRING,
+    "required"=>true
+    ]
     );
 
     /**
@@ -64,9 +64,11 @@ class Sample_Action_Delete extends Sample_ActionClass
         
         if ($this->af->validate() > 0) {
             // forward to error view (this is sample)
-	    if($this->session->isStart()){
-            return 'userlist';
-}else{return "needlogin";}	
+            if ($this->session->isStart()) {
+                return 'userlist';
+            } else {
+                return "needlogin";
+            }
         }
         //$sample = $this->af->get('sample');
         
@@ -81,14 +83,16 @@ class Sample_Action_Delete extends Sample_ActionClass
      */
     public function perform()
     {
-if(!$this->session->isStart()){return "needlogin";}
-$um=new UserManager();
-    $um=new UserManager();
-    $result=$um->userdelete($this->backend,$this->af->get("mailaddress"));
-    if(Ethna::isError($result)){
-	//$this->ae->addObject("loginError",$result);
-        return 'userlist';
-    }
+        if (!$this->session->isStart()) {
+            return "needlogin";
+        }
+        $um=new UserManager();
+        $um=new UserManager();
+        $result=$um->userdelete($this->backend, $this->af->get("mailaddress"));
+        if (Ethna::isError($result)) {
+        //$this->ae->addObject("loginError",$result);
+            return 'userlist';
+        }
 
 
         return 'userlist';

@@ -24,4 +24,3 @@ class Sample_View_Login extends Sample_ViewClass
     {
     }
 }
-
