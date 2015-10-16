@@ -2,8 +2,11 @@
   <p>Welcome to Ethnam!</p>
 {if $app.logined}
 {$app.username}-san, Good Morning.<a href="?action_logout=true"> log out </a>
-<a href="?action_userlist=true">user list</a>
+<a href="/admin/?action_userlist=true">user list</a>
+ 
 <a href="?action_changepass=true">change password</a>
+ 
+<a href="?action_comment=true">send comment</a>
 {else}
 <a href="?action_login=true"> log in</a>
 <a href="?action_signup=true"> sign up</a>
