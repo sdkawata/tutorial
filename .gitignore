@@ -4,6 +4,7 @@
 *~
 \#*
 .*
+/www/uploaded/*
 !/.gitignore
 !/.ethna
 !/www/.htaccess
