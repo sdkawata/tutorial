@@ -76,14 +76,12 @@ class Sample_Action_CommentDo extends Sample_ActionClass
      */
     public function perform()
     {
-        if (! $this->session->isStart()) {return 'needlogin';}
+        if (! $this->session->isStart()) {
+            return 'needlogin';
+        }
         error_log("send mail");
         $mailaddr = file_get_contents("/home/vagrant/mailaddr");
         $comment=$this->af->get('comment');
-        error_log("mailaddr:" . $mailaddr . " comment:".$comment);
-        $res=mail('kawata@sencorp.co.jp','hoge','fuge');
-        error_log($res);
-        return 'index';
         $ethna_mail = & new Ethna_MailSender($this->backend);
         $ethna_mail->send(
             $mailaddr,
@@ -93,7 +91,6 @@ class Sample_Action_CommentDo extends Sample_ActionClass
                 'username' => $this->session->get('username')
             )
         );
-        error_log("mail sended");
         return 'index';
     }
 }

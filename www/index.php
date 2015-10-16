@@ -1,6 +1,7 @@
 <?php
 
 require_once dirname(__FILE__) . '/../app/Sample_Controller.php';
+$_SERVER['URL_HANDLER']='index';
 
 /**
  * If you want to enable the UrlHandler, comment in following line,
@@ -13,4 +14,3 @@ require_once dirname(__FILE__) . '/../app/Sample_Controller.php';
  * Run application.
  */
 Sample_Controller::main('Sample_Controller', 'index','index');
-

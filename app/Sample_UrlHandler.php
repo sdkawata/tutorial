@@ -17,19 +17,9 @@ class Sample_UrlHandler extends Ethna_UrlHandler
 {
     /** @var    array   Action Mapping */
     var $action_map = array(
-        /**
-         * @see http://ethna.jp/ethna-document-dev_guide-urlhandler.html
-         */
-        /*
-        'index'  => array(                      // UrlHandler's namespace seted in the entry point
-            'user_login' => array(              // key as a action name
-                'path'          => 'login',     // url path
-                'path_regexp'   => false,       // url path setted by regexp
-                'path_ext'      => false,       // parameter/ActionForm map
-                'option'        => array(),     // option
-            ),
-        ),
-         */
+        'index'=>array(
+            'userlist'=>array('path'=>'userlist','path_regexp'=>false,'path_ext'=>false)
+        )
     );
 
     /**
