@@ -89,8 +89,6 @@ class Sample_Action_Delete extends Sample_ActionClass
             //$this->ae->addObject("loginError",$result);
             return 'userlist';
         }
-
-
         return 'userlist';
     }
 }

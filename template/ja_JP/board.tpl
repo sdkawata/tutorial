@@ -10,6 +10,10 @@ submitted by {$item.userid}
 {if $item.submittime!==NULL}
 at {$item.submittime}
 {/if}
+<form action="." method="post">
+<input type="hidden" name="id" value="{$item.id}">
+<input type="submit" name="action_board_delete" value="DELETE">
+</form>
 </td></tr>
 <tr><td>
 {$item.content}
