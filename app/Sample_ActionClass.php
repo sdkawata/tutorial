@@ -52,4 +52,9 @@ class Sample_ActionClass extends Ethna_ActionClass
     {
         return parent::perform();
     }
+
+    public function redirectindex()
+    {
+        header("Location: " . $this->config->get('url'));
+    }
 }
