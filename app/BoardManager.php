@@ -15,6 +15,7 @@ class BoardManager
         if (Ethna::isError($list)) {
             return $list;
         }
+        $id = 0;
         while ($item=$list->fetchRow()) {
             $id= $id<$item['id'] ? $item['id'] : $id;
         }

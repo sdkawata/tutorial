@@ -16,7 +16,7 @@ at {$item.submittime}
 </form>
 </td></tr>
 <tr><td>
-<font color="{$item.color}">{$item.content}</font>
+<font color="{$item.color}">{$item.content|nl2br}</font>
 {if $item.filename!==NULL}
 <img src="/uploaded/{$item.filename}" width="200">
 </td></tr>
@@ -55,7 +55,7 @@ start&nbsp;&lt;&lt;
 
 <form action="." method="post" enctype="multipart/form-data">
 <textarea cols="50" rows="10" name="content">{$form.text}</textarea>
-<input type="hidden" name="MAX_FILE_SIZE" value="100000000">
+<input type="hidden" name="MAX_FILE_SIZE" value="100000000000">
 Upload this file:<input type="file" name="userfile">
 <br>
 color:

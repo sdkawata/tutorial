@@ -27,12 +27,12 @@ class Sample_Form_BoardDo extends Sample_ActionForm
         'content'=>array(
             'type'=>VAR_TYPE_STRING,
             'name'=>'content',
-            'require'=>true
+            'required'=>true
         ),
         'color'=>array(
             'type'=>VAR_TYPE_STRING,
             'name'=>'content',
-            'require'=>true
+            'required'=>true
         )
     );
     /**
