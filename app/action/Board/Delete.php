@@ -63,6 +63,7 @@ class Sample_Action_BoardDelete extends Sample_ActionClass
     {
         $bm=new BoardManager();
         $bm->delete($this->backend,$this->af->get('id'));
+        $this->redirect('board');
         return 'board';
     }
 }

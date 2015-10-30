@@ -22,10 +22,5 @@ class Sample_View_Board extends Sample_ViewClass
      */
     public function preforward()
     {
-        $bm=new BoardManager();
-        $boardlist=$bm->boardlist($this->backend);
-        krsort($boardlist);
-        $this->af->setApp('board', $boardlist);
-
     }
 }

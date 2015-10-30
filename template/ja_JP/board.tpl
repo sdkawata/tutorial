@@ -3,7 +3,7 @@
 
 {* {$app.board|@var_dump} *}
 
-{foreach from=$app.board item=item}
+{foreach from=$app.posts item=item}
 <table bordercolor="#333333" cellpadding="5">
 <tr><td>
 submitted by {$item.userid}
@@ -16,16 +16,35 @@ at {$item.submittime}
 </form>
 </td></tr>
 <tr><td>
-{$item.content}
-</td></tr>
+<font color="{$item.color}">{$item.content}</font>
 {if $item.filename!==NULL}
-<tr><td>
 <img src="/uploaded/{$item.filename}" width="200">
 </td></tr>
 {/if}
 </table>
 {/foreach}
 
+{if $app.hasprev}
+<a href='{$app.link}&start=0'>start</a>&nbsp;
+<a href='{$app.link}&start={$app.prev}'>&lt;&lt;</a>
+{else}
+start&nbsp;&lt;&lt;
+{/if}
+&nbsp;
+{foreach from=$app.pager item=page}
+{if $page.offset==$app.current}
+<strong>{$page.index}</strong>
+{else}
+<a href="{$app.link}&start={$page.offset}">{$page.index}</a>
+{/if}
+&nbsp;
+{/foreach}
+{if $app.hasnext}
+<a href="{$app.link}&start={$app.next}">&gt;&gt;</a>&nbsp;
+<a href="{$app.link}&start={$app.last}">last</a>
+{else}
+&gt;&gt;&nbsp;last
+{/if}
 {if count($errors)}
 <ul>
 {foreach from=$errors item=error}
