@@ -53,8 +53,12 @@ class Sample_ActionClass extends Ethna_ActionClass
         return parent::perform();
     }
 
-    public function redirectindex()
+    public function redirect($action)
     {
-        header("Location: " . $this->config->get('url'));
+        if ($action==="") {
+            header("Location: " . $this->config->get('url'));
+        } else {
+            header("Location: " . $this->config->get('url') . '?action_' . $action . '=true');
+        }
     }
 }

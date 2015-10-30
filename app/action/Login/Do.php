@@ -96,7 +96,7 @@ class Sample_Action_LoginDo extends Sample_ActionClass
 //login
         $this->session->start();
         $this->session->set("username", $this->af->get("mailaddress"));
-        $this->redirectindex();
+        $this->redirect();
         return "index";
     }
 }

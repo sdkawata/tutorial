@@ -88,7 +88,7 @@ class Sample_Action_SignupDo extends Sample_ActionClass
 //login
         $this->session->start();
         $this->session->set("username", $this->af->get("mailaddress"));
-        $this->redirectindex();
+        $this->redirect();
         return 'index';
         //return 'signup_do';
     }
