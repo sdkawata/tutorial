@@ -38,11 +38,11 @@ class BoardManager
         while ($item=$list->fetchRow()) {
             $res[$item['id']]=array(
                 'id'=>$item['id'],
-                'username'=>$item['username'],
-                'fname'=>$item['fname'],
+                'userid'=>$item['username'],
+                'filename'=>$item['filename'],
                 'color'=>$item['color'],
-                'time'=>$item['time'],
-                'text'=>$item['text']
+                'submittime'=>$item['submittime'],
+                'content'=>$item['content']
             );
         }
         return $res;

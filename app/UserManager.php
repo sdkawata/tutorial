@@ -8,7 +8,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $list=$db->query("SELECT * FROM usernames WHERE id=?", array($mailaddr));
+        $list=$db->query("SELECT * FROM userlist WHERE id=?", array($mailaddr));
         if (Ethna::isError($list)) {
             return $list;
         }
@@ -28,7 +28,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $list=$db->query("SELECT * FROM usernames WHERE id=?", array($mailaddr));
+        $list=$db->query("SELECT * FROM userlist WHERE id=?", array($mailaddr));
         if (Ethna::isError($list)) {
             return $list;
         }
@@ -38,7 +38,7 @@ class UserManager
         }
         if ($item['id']===$mailaddr && $item['passwd']===$oldpass) {
             // change pass
-            $res=$db->autoExecute("usernames", array("passwd"=>$newpass), "UPDATE", "id='{$mailaddr}'");
+            $res=$db->autoExecute("userlist", array("passwd"=>$newpass), "UPDATE", "id='{$mailaddr}'");
             if (Ethna::isError($res)) {
                 return $res;
             }
@@ -52,7 +52,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $list=$db->query("DELETE FROM usernames WHERE id=?", array($mailaddr));
+        $list=$db->query("DELETE FROM userlist WHERE id=?", array($mailaddr));
         if (Ethna::isError($list)) {
             return $list;
         }
@@ -68,7 +68,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $list=$db->query("SELECT * FROM usernames WHERE id=?", array($mailaddr));
+        $list=$db->query("SELECT * FROM userlist WHERE id=?", array($mailaddr));
         if (Ethna::isError($list)) {
             return $list;
         }
@@ -76,7 +76,7 @@ class UserManager
         if ($item) {
             return Ethna::raiseNotice("the user name is already used", E_SAMPLE_AUTH);
         }
-        $res=$db->autoExecute("usernames", array("id"=>$mailaddr,"passwd"=>$passwd), "INSERT");
+        $res=$db->autoExecute("userlist", array("id"=>$mailaddr,"passwd"=>$passwd), "INSERT");
         if (Ethna::isError($res)) {
             return $res;
         }
@@ -90,7 +90,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $list=$db->query("select * from usernames");
+        $list=$db->query("select * from userlist");
         if (Ethna::isError($list)) {
             return $list;
         }

@@ -14,12 +14,12 @@
 <table bordercolor="#333333" cellpadding="5">
 <tr><td>
 {$item.username}
-{if $item.time!==NULL}
- {$item.time}
+{if $item.submittime!==NULL}
+ {$item.submittime}
 {/if}
 </td></tr>
 <tr><td>
-{$item.text}
+{$item.content}
 </td></tr>
 </table>
 {/foreach}
