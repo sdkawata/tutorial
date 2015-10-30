@@ -3,7 +3,7 @@
 class BoardManager
 {
     private function savepath($fname) {
-        return '/home/vagrant/sample/www/uploaded' . $newfname;
+        return '/home/vagrant/sample/www/uploaded/' . $fname;
     }
     public function post($backend, $userid, $text, $color, $fname, $ext)
     {
@@ -20,10 +20,10 @@ class BoardManager
         }
         $id=$id+1;
         $newfname=NULL;
-        if ($fname!==NULL || $fname!=='') {
-            error_log("fname:" . $fname);
+        error_log("fname:" . var_dump($fname));
+        if ($fname!==NULL && $fname!=='') {
             $newfname='image' . $id . '.' . $ext;
-            $fullpath=savepath($newfname);
+            $fullpath=$this->savepath($newfname);
             rename($fname, $fullpath);
         }
         $res=$db->autoExecute(
@@ -77,7 +77,7 @@ class BoardManager
         if ($item=$list->fetchRow()) {
             $fname=$item['filename'];
             if ($fname!==NULL && $fname!=="") {
-                unlink(savepath($fname));
+                unlink($this->savepath($fname));
             }
         }
         $list=$db->query("DELETE FROM board WHERE id=?", array($id));
