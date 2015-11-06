@@ -62,8 +62,12 @@ class Sample_Action_BoardDelete extends Sample_ActionClass
     public function perform()
     {
         $bm=new BoardManager();
-        $bm->delete($this->backend,$this->af->get('id'));
-        $this->redirect('board');
+        $res=$bm->delete($this->backend,$this->af->get('id'));
+        if (Ethna::isError($res)) {
+            $this->ae->addObject('DeleteError',$res);
+        }else{
+            $this->redirect('board');
+        }
         return 'board';
     }
 }

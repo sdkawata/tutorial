@@ -104,7 +104,7 @@ class Sample_Action_BoardDo extends Sample_ActionClass
         error_log("fname2: " . $fname);
         $content=$this->af->get('content');
         //$content='hage';
-        $bm->post(
+        $res=$bm->post(
             $this->backend,
             $this->session->get('username'),
             $content,
@@ -112,7 +112,11 @@ class Sample_Action_BoardDo extends Sample_ActionClass
             $fname,
             $ext
         );
-        $this->redirect('board');
+        if (Ethna::isError($res)) {
+            $this->ae->addObject('PostError',$res);
+        }else{
+            $this->redirect('board');
+        }
         return 'board';
     }
 }
