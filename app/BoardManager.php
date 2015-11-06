@@ -59,7 +59,7 @@ class BoardManager
                         'ContentType'=>$ctype
                     )
                 );
-                $fileurl=$result['ObjectURL'];
+                //$fileurl=$result['ObjectURL'];
             }catch(Exception $e){
                 throw $e;
                 //return Ethna::raiseNotice('error occured while accessing AWS errormessage:' . $e->getMessage(),E_SAMPLE_AUTH);
@@ -71,7 +71,7 @@ class BoardManager
                 'id'=>$id,
                 'userid'=>$userid,
                 'fileid'=>$fileid,
-                'fileurl'=>$fileurl,
+                //'fileurl'=>$fileurl,
                 'color'=>$color,
                 'content'=>$text,
                 'submittime'=>date('Y-m-d H:i:s')
@@ -99,7 +99,7 @@ class BoardManager
             $res[$item['id']]=array(
                 'id'=>$item['id'],
                 'userid'=>$item['userid'],
-                'fileurl'=>$item['fileurl'],
+                //'fileurl'=>$item['fileurl'],
                 'fileid'=>$item['fileid'],
                 'color'=>$item['color'],
                 'submittime'=>$item['submittime'],
@@ -107,6 +107,25 @@ class BoardManager
             );
         }
         return $res;
+    }
+    public function getImageUrl($fileid)
+    {
+        try{
+            $s3=Aws\S3\S3Client::factory(
+                array(
+                    'key'=>SecretConfig::$config['AWS_ACCESS_KEY_ID'],
+                    'secret'=>SecretConfig::$config['AWS_SECRET_ACCESS_KEY'],
+                    'region'=>SecretConfig::$config['AWS_DEFAULT_REGION']
+                )
+            );
+            $result=$s3->getObjectUrl(
+                SecretConfig::$config['AWS_BUCKET_NAME'],
+                $fileid
+            );
+        }catch(Exception $e){
+            throw $e;
+        }
+        return $result;
     }
     public function delete($backend, $id)
     {
@@ -143,6 +162,5 @@ class BoardManager
             return $list;
         }
         return null;
-
     }
 }

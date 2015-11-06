@@ -40,6 +40,7 @@ class Sample_View_Board extends Sample_ViewClass
         $display_posts=array();
         for ($i=$start; $i<$start+$count && $i<$total; $i++) {
             $cur=current(array_slice($boardlist,$i,1,true));
+            $cur['fileurl']=$bm->getImageUrl($cur['fileid']);
             array_push($display_posts,$cur);
         }
         if ($start>0) {
