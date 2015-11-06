@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "27312b5cd43056e35d447a0aa07f51ef",
-    "content-hash": "cb2aee19a477e1715779cf1af3d936ed",
+    "hash": "33a0be740b694fb22ed553ab7238f988",
+    "content-hash": "0f580e093e5a967cd98c99658d464453",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -122,6 +122,50 @@
             ],
             "abandoned": "ethnam/ethnam",
             "time": "2015-06-21 09:10:06"
+        },
+        {
+            "name": "dqneo/s3signer",
+            "version": "v0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DQNEO/S3Signer.git",
+                "reference": "205bb798600ea93e26620eb8c10635b53fa37029"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DQNEO/S3Signer/zipball/205bb798600ea93e26620eb8c10635b53fa37029",
+                "reference": "205bb798600ea93e26620eb8c10635b53fa37029",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DQNEO\\": "src/DQNEO"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL3"
+            ],
+            "authors": [
+                {
+                    "name": "DQNEO",
+                    "role": "Administrator"
+                }
+            ],
+            "description": "a library for AmazonS3 direct uploading",
+            "homepage": "https://github.com/DQNEO/S3Signer",
+            "keywords": [
+                "amazons3",
+                "aws"
+            ],
+            "time": "2015-06-18 04:28:44"
         },
         {
             "name": "ethnam/generator",

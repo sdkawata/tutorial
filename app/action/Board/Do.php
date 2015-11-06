@@ -20,9 +20,10 @@ class Sample_Form_BoardDo extends Sample_ActionForm
      *  @var    array   form definition.
      */
     public $form = array(
-        'userfile'=>array(
-            'type'=>VAR_TYPE_FILE,
-            'name'=>'userfile'
+        'uploaded-fileid'=>array(
+            'type'=>VAR_TYPE_STRING,
+            'name'=>'userfile',
+            'required'=>true
         ),
         'content'=>array(
             'type'=>VAR_TYPE_STRING,
@@ -93,15 +94,7 @@ class Sample_Action_BoardDo extends Sample_ActionClass
         if ($color===NULL) {
             $color='#000000';
         }
-        $file=$this->af->get('userfile');
-        error_log("file:" . var_dump($file));
-        $fname=NULL;
-        $ext=NULL;
-        if ($file['size']!==0 && $file['tmp_name']!=='') {
-            $fname=$file['tmp_name'];
-            $ext=pathinfo($file["name"], PATHINFO_EXTENSION);
-        }
-        error_log("fname2: " . $fname);
+        $fileid=$this->af->get('uploaded-fileid');
         $content=$this->af->get('content');
         //$content='hage';
         $res=$bm->post(
@@ -109,8 +102,7 @@ class Sample_Action_BoardDo extends Sample_ActionClass
             $this->session->get('username'),
             $content,
             $color,
-            $fname,
-            $ext
+            $fileid
         );
         if (Ethna::isError($res)) {
             $this->ae->addObject('PostError',$res);

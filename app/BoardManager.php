@@ -48,7 +48,7 @@ class BoardManager
         }
         return null;
     }
-    public function post($backend, $userid, $text, $color, $fname, $ext)
+    public function post($backend, $userid, $text, $color, $fileid)
     {
         $db=& $backend->getDB();
         if (Ethna::isError($db)) {
@@ -63,12 +63,6 @@ class BoardManager
             $id= $id<$item['id'] ? $item['id'] : $id;
         }
         $id=$id+1;
-        $fileurl=NULL;
-        $fileid=NULL;
-        if ($fname!==NULL && $fname!=='') {
-            $fileid='image' . $id . '.' . $ext;
-            $this->s3upload($fname, $fileid,$ext);
-        }
         $res=$db->autoExecute(
             'board',
             array(

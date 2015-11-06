@@ -3,6 +3,7 @@
 "dqneo/ethnam":"dev-master",
 "ethnam/generator":"dev-master",
 "smarty/smarty":"2.6.*",
-"aws/aws-sdk-php":"2.7.*"
+"aws/aws-sdk-php":"2.7.*",
+"dqneo/s3signer":"v0.2.0"
 }
 }

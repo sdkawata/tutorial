@@ -58,7 +58,8 @@ start&nbsp;&lt;&lt;
 <form action="." method="post" enctype="multipart/form-data">
 <textarea cols="50" rows="10" name="content">{$form.text}</textarea>
 <input type="hidden" name="MAX_FILE_SIZE" value="100000000000">
-Upload this file:<input type="file" name="userfile">
+<input type="hidden" id="uploaded-fileid" name="uploaded-fileid" value="">
+<input type="submit" name="action_board_do" value="POST">
 <br>
 color:
 <select name="color">
@@ -67,6 +68,15 @@ color:
 <option value="#00ff00" style="color:#00ff00">green</option>
 <option value="#0000ff" style="color:#0000ff">blue</option>
 </select>
-<br>
-<input type="submit" name="action_board_do" value="SUBMIT">
 </form>
+
+<!-- S3Signer -->
+<script src="/uploader.js"></script>
+<script src="/board_uploader.js"></script>
+<input type="file" id="files" name="files[]"/>
+<div id="status"></div>
+
+
+<br>
+
+
