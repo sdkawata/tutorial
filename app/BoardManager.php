@@ -20,19 +20,42 @@ class BoardManager
             $id= $id<$item['id'] ? $item['id'] : $id;
         }
         $id=$id+1;
-        $newfname=NULL;
+        $fileurl=NULL;
+        $fileid=NULL;
         error_log("fname:" . var_dump($fname));
         if ($fname!==NULL && $fname!=='') {
-            $newfname='image' . $id . '.' . $ext;
-            $fullpath=$this->savepath($newfname);
-            rename($fname, $fullpath);
+            $fileid='image' . $id . '.' . $ext;
+            //$fullpath=$this->savepath($newfname);
+            //rename($fname, $fullpath);
+            try{
+                $s3=Aws\S3\S3Client::factory(
+                    array(
+                        'key'=>SecretConfig::$config['AWS_ACCESS_KEY_ID'],
+                        'secret'=>SecretConfig::$config['AWS_SECRET_ACCESS_KEY'],
+                        'region'=>SecretConfig::$config['AWS_DEFAULT_REGION']
+                    )
+                );
+                $result=$s3->putObject(
+                    array(
+                        'ACL'=>'public-read',
+                        'Bucket'=>SecretConfig::$config['AWS_BUCKET_NAME'],
+                        'Key'=>$fileid,
+                        'Body'=>fopen($fname,'r')
+                    )
+                );
+                $fileurl=$result['ObjectURL'];
+            }catch(Exception $e){
+                throw $e;
+                //return Ethna::raiseNotice('error occured while accessing AWS errormessage:' . $e->getMessage(),E_SAMPLE_AUTH);
+            }
         }
         $res=$db->autoExecute(
             'board',
             array(
                 'id'=>$id,
                 'userid'=>$userid,
-                'filename'=>$newfname,
+                'fileid'=>$fileid,
+                'fileurl'=>$fileurl,
                 'color'=>$color,
                 'content'=>$text,
                 'submittime'=>date('Y-m-d H:i:s')
@@ -60,7 +83,8 @@ class BoardManager
             $res[$item['id']]=array(
                 'id'=>$item['id'],
                 'userid'=>$item['userid'],
-                'filename'=>$item['filename'],
+                'fileurl'=>$item['fileurl'],
+                'fileid'=>$item['fileid'],
                 'color'=>$item['color'],
                 'submittime'=>$item['submittime'],
                 'content'=>$item['content']
@@ -76,9 +100,26 @@ class BoardManager
         }
         $list=$db->query("select * from board where id=?",array($id));
         if ($item=$list->fetchRow()) {
-            $fname=$item['filename'];
-            if ($fname!==NULL && $fname!=="") {
-                unlink($this->savepath($fname));
+            $fileid=$item['fileid'];
+            if ($fileid!==NULL && $fileid!=="") {
+                try{
+                    $s3=Aws\S3\S3Client::factory(
+                        array(
+                            'key'=>SecretConfig::$config['AWS_ACCESS_KEY_ID'],
+                            'secret'=>SecretConfig::$config['AWS_SECRET_ACCESS_KEY'],
+                            'region'=>SecretConfig::$config['AWS_DEFAULT_REGION']
+                        )
+                    );
+                    $result=$s3->deleteObject(
+                        array(
+                            'Bucket'=>SecretConfig::$config['AWS_BUCKET_NAME'],
+                            'Key'=>$fileid,
+                        )
+                    );
+                }catch(Exception $e){
+                    throw $e;
+                    //return Ethna::raiseNotice('error occured while accessing AWS errormessage:' . $e->getMessage(),E_SAMPLE_AUTH);
+                }
             }
         }
         $list=$db->query("DELETE FROM board WHERE id=?", array($id));

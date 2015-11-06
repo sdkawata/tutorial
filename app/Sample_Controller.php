@@ -18,6 +18,7 @@ require_once BASE . '/vendor/autoload.php';
 require_once 'Sample_Error.php';
 require_once 'UserManager.php';
 require_once 'BoardManager.php';
+require_once 'SecretConfig.php';
 require_once 'Sample_ActionClass.php';
 require_once 'Sample_ActionForm.php';
 require_once 'Sample_ViewClass.php';

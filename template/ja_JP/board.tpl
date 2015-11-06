@@ -17,8 +17,8 @@ at {$item.submittime}
 </td></tr>
 <tr><td>
 <font color="{$item.color}">{$item.content|nl2br}</font>
-{if $item.filename!==NULL}
-<img src="/uploaded/{$item.filename}" width="200">
+{if $item.fileurl!==NULL}
+<img src="{$item.fileurl}" width="200">
 </td></tr>
 {/if}
 </table>

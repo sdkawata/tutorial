@@ -3,7 +3,8 @@ CREATE TABLE board(
 id int,
 userid text,
 color text,
-filename text,
+fileid text,
+fileurl text,
 content text,
 submittime timestamp
 )

@@ -4,6 +4,7 @@
 *~
 \#*
 .*
+/app/SecretConfig.php
 /www/uploaded/*
 !/.gitignore
 !/.ethna
