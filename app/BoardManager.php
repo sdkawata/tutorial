@@ -2,6 +2,14 @@
 
 class BoardManager
 {
+    private $acceptable_exts=array(
+        'png'=>array(
+            'content-type'=>'image/png'
+        ),
+        'jpg'=>array(
+            'content-type'=>'image/jpeg'
+        )
+    );
     private function savepath($fname) {
         return '/home/vagrant/sample/www/uploaded/' . $fname;
     }
@@ -24,6 +32,12 @@ class BoardManager
         $fileid=NULL;
         error_log("fname:" . var_dump($fname));
         if ($fname!==NULL && $fname!=='') {
+            $ctype='binary/octet-stream';
+            if (array_key_exists($ext,$this->acceptable_exts)) {
+                $ctype=$this->acceptable_exts[$ext]['content-type'];
+            }else{
+                return Ethna::raiseNotice("a file which has ext ". $ext . ' is not allowed to upload',E_SAMPLE_AUTH);
+            }
             $fileid='image' . $id . '.' . $ext;
             //$fullpath=$this->savepath($newfname);
             //rename($fname, $fullpath);
@@ -35,12 +49,14 @@ class BoardManager
                         'region'=>SecretConfig::$config['AWS_DEFAULT_REGION']
                     )
                 );
+                error_log('ctype:' . $ctype);
                 $result=$s3->putObject(
                     array(
                         'ACL'=>'public-read',
                         'Bucket'=>SecretConfig::$config['AWS_BUCKET_NAME'],
                         'Key'=>$fileid,
-                        'Body'=>fopen($fname,'r')
+                        'Body'=>fopen($fname,'r'),
+                        'ContentType'=>$ctype
                     )
                 );
                 $fileurl=$result['ObjectURL'];
