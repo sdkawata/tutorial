@@ -6,7 +6,9 @@
 {foreach from=$app.posts item=item}
 <table bordercolor="#333333" cellpadding="5">
 <tr><td>
-submitted by {$item.userid}
+submitted by 
+<a href=/?action_userpage=true&userid={$item.userid}>{$item.userid}</a>
+<img src="{$item.iconurl}" width=64>
 {if $item.submittime!==NULL}
 at {$item.submittime}
 {/if}

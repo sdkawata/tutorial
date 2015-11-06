@@ -34,14 +34,14 @@ class Sample_View_Board extends Sample_ViewClass
         $count=5;
 
         $bm=new BoardManager();
+        $um=new UserManager();
         $boardlist=$bm->boardlist($this->backend);
         krsort($boardlist);
         $total=count($boardlist);
         $display_posts=array();
         for ($i=$start; $i<$start+$count && $i<$total; $i++) {
             $cur=current(array_slice($boardlist,$i,1,true));
-            $cur['fileurl']=$bm->getImageUrl($cur['fileid']);
-            array_push($display_posts,$cur);
+            array_push($display_posts,$bm->addUrl($cur));
         }
         if ($start>0) {
             $this->af->setApp('hasprev', true);

@@ -9,6 +9,7 @@
 <a href="?action_comment=true">send comment</a>
 <a href="?action_imageadd=true"> upload image</a>
 <a href="?action_board=true"> board</a>
+<a href="?action_iconadd=true">iconadd</a>
 {else}
 <a href="?action_login=true"> log in</a>
 <a href="?action_signup=true"> sign up</a>

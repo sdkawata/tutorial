@@ -13,6 +13,41 @@ class BoardManager
     private function savepath($fname) {
         return '/home/vagrant/sample/www/uploaded/' . $fname;
     }
+    public function s3upload($fname, $fileid, $ext)
+    {
+        $ctype='binary/octet-stream';
+        if (array_key_exists($ext,$this->acceptable_exts)) {
+            $ctype=$this->acceptable_exts[$ext]['content-type'];
+        }else{
+            return Ethna::raiseNotice("a file which has ext ". $ext . ' is not allowed to upload',E_SAMPLE_AUTH);
+        }
+        //$fullpath=$this->savepath($newfname);
+        //rename($fname, $fullpath);
+        try{
+            $s3=Aws\S3\S3Client::factory(
+                array(
+                    'key'=>SecretConfig::$config['AWS_ACCESS_KEY_ID'],
+                    'secret'=>SecretConfig::$config['AWS_SECRET_ACCESS_KEY'],
+                    'region'=>SecretConfig::$config['AWS_DEFAULT_REGION']
+                    )
+            );
+            error_log('ctype:' . $ctype);
+            $result=$s3->putObject(
+                array(
+                    'ACL'=>'public-read',
+                    'Bucket'=>SecretConfig::$config['AWS_BUCKET_NAME'],
+                    'Key'=>$fileid,
+                    'Body'=>fopen($fname,'r'),
+                        'ContentType'=>$ctype
+                )
+            );
+            //$fileurl=$result['ObjectURL'];
+        }catch(Exception $e){
+            throw $e;
+            //return Ethna::raiseNotice('error occured while accessing AWS errormessage:' . $e->getMessage(),E_SAMPLE_AUTH);
+        }
+        return null;
+    }
     public function post($backend, $userid, $text, $color, $fname, $ext)
     {
         $db=& $backend->getDB();
@@ -30,40 +65,9 @@ class BoardManager
         $id=$id+1;
         $fileurl=NULL;
         $fileid=NULL;
-        error_log("fname:" . var_dump($fname));
         if ($fname!==NULL && $fname!=='') {
-            $ctype='binary/octet-stream';
-            if (array_key_exists($ext,$this->acceptable_exts)) {
-                $ctype=$this->acceptable_exts[$ext]['content-type'];
-            }else{
-                return Ethna::raiseNotice("a file which has ext ". $ext . ' is not allowed to upload',E_SAMPLE_AUTH);
-            }
             $fileid='image' . $id . '.' . $ext;
-            //$fullpath=$this->savepath($newfname);
-            //rename($fname, $fullpath);
-            try{
-                $s3=Aws\S3\S3Client::factory(
-                    array(
-                        'key'=>SecretConfig::$config['AWS_ACCESS_KEY_ID'],
-                        'secret'=>SecretConfig::$config['AWS_SECRET_ACCESS_KEY'],
-                        'region'=>SecretConfig::$config['AWS_DEFAULT_REGION']
-                    )
-                );
-                error_log('ctype:' . $ctype);
-                $result=$s3->putObject(
-                    array(
-                        'ACL'=>'public-read',
-                        'Bucket'=>SecretConfig::$config['AWS_BUCKET_NAME'],
-                        'Key'=>$fileid,
-                        'Body'=>fopen($fname,'r'),
-                        'ContentType'=>$ctype
-                    )
-                );
-                //$fileurl=$result['ObjectURL'];
-            }catch(Exception $e){
-                throw $e;
-                //return Ethna::raiseNotice('error occured while accessing AWS errormessage:' . $e->getMessage(),E_SAMPLE_AUTH);
-            }
+            $this->s3upload($fname, $fileid,$ext);
         }
         $res=$db->autoExecute(
             'board',
@@ -162,5 +166,14 @@ class BoardManager
             return $list;
         }
         return null;
+    }
+    public function addUrl($entry){
+        $um=new UserManager();
+        if($entry['fileid']!==NULL && $entry['fileid']!==''){
+            $entry['fileurl']=$this->getImageUrl($entry['fileid']);
+        }
+        $entry['iconurl']=$um->getIconUrl($entry['userid']);
+        return $entry;
+
     }
 }

@@ -100,4 +100,41 @@ class UserManager
         }
         return $res;
     }
+    public function getIconUrl($userid)
+    {
+        $res="";
+        try{
+            $s3=Aws\S3\S3Client::factory(
+                array(
+                    'key'=>SecretConfig::$config['AWS_ACCESS_KEY_ID'],
+                    'secret'=>SecretConfig::$config['AWS_SECRET_ACCESS_KEY'],
+                    'region'=>SecretConfig::$config['AWS_DEFAULT_REGION']
+                )
+            );
+            if ($s3->doesObjectExist(
+                SecretConfig::$config['AWS_BUCKET_NAME'],
+                $userid . '/icon'
+            )) {
+                $res=$s3->getObjectUrl(
+                    SecretConfig::$config['AWS_BUCKET_NAME'],
+                    $userid . '/icon'
+                );
+            }else{
+                $res=$s3->getObjectUrl(
+                    SecretConfig::$config['AWS_BUCKET_NAME'],
+                    'defaulticon'
+                );
+            }
+        }catch(Exception $e){
+            throw $e;
+            //return Ethna::raiseNotice('error occured while accessing AWS errormessage:' . $e->getMessage(),E_SAMPLE_AUTH);
+        }
+        return $res;
+    }
+    public function uploadIcon($userid, $fname, $ext)
+    {
+        $fileid = ($userid . '/icon');
+        $bm=new BoardManager();
+        $res=$bm->s3upload($fname, $fileid, $ext);
+    }
 }
