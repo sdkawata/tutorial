@@ -79,7 +79,7 @@ class Sample_Action_ImageaddDo extends Sample_ActionClass
         if ($file['size']===0 || $file['tmp_name']==='') {
             return 'imageadd';
         }
-        rename($file['tmp_name'], '/home/vagrant/sample/www/uploaded/image.jpg');
+        rename($file['tmp_name'], SecretConfig::$config['WALLPAPER_DIR']);
         return 'index';
     }
 }
