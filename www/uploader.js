@@ -35,7 +35,9 @@ Uploader.uploadFiles = function (files) {
                     Uploader.uploadToS3(file, url, acl, meta,objectKey);
                   },
                   function(status,responseText) {// on error
-                    Uploader.log('Could not contact signing script. Status = ' + status + 'Response=' + responseText);
+
+			  Uploader.log('Could not contact signing script. Status = ' + status + 'Response=' + responseText);
+
                   });
   }
 };
@@ -128,7 +130,11 @@ Uploader.onUploadSuccess = function(file, key) {
 Uploader.onUploadError = function(file, xhr) {
   this.countFailure++;
   //override as you like
+if(file.name.match('^[\x20-\x7E]*$')){
   this.log(file.name + " upload failed. status=" +  xhr.status);
+}else{
+    Uploader.log('Upload failed probably because the file name contains non-ASCII characters.');
+}
 };
 
 Uploader.log = function(msg) {
