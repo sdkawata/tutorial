@@ -20,7 +20,9 @@ at {$item.submittime}
 <tr><td>
 <font color="{$item.color}">{$item.content|nl2br}</font>
 {if $item.fileurl!==NULL}
+<a href="{$item.fileurl}">
 <img src="{$item.fileurl}" width="200">
+</a>
 </td></tr>
 {/if}
 </table>

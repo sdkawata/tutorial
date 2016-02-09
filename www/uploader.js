@@ -9,6 +9,7 @@ Uploader.makeKey = function (filename) {
 };
 
 Uploader.uploadFiles = function (files) {
+    this.log("now uploading file. Please wait until uploading is completed.");
   for (var i = 0; i < files.length; i++) {
     var file = files[i];
     var key = this.makeKey(file.name);

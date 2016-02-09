@@ -4,6 +4,12 @@
  *
  * update:
  */
+$app = BASE . "/app";
+
+set_include_path(implode(PATH_SEPARATOR, array($app)) . PATH_SEPARATOR . get_include_path());
+
+require_once 'SecretConfig.php';
+
 $config = array(
     // site
     'url' => '',
@@ -14,7 +20,7 @@ $config = array(
 
     // db
     // sample-1: single db
-    'dsn' => 'pgsql://postgres:passwd@localhost/postgres',
+    'dsn' => SecretConfig::$config['DB_ADDR'],
     //
     // sample-2: single db w/ multiple users
     // 'dsn'   => 'mysql://rw_user:password@server/database', // read-write
