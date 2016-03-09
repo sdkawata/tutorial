@@ -1,0 +1,95 @@
+<?php
+/**
+ *  User-info.php
+ *
+ *  @author     {$author}
+ *  @package    Sample
+ */
+
+
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+/**
+ *  user-info Form implementation.
+ *
+ *  @author     {$author}
+ *  @access     public
+ *  @package    Sample
+ */
+class Sample_Form_Deletejson extends Sample_ActionForm
+{
+    /**
+     *  @access protected
+     *  @var    array   form definition.
+     */
+    public $form = array(
+        'id'=>array(
+            'type'=>VAR_TYPE_STRING,
+            'name'=>'userid',
+            'required'=>true
+        )
+    );
+
+    /**
+     *  Form input value convert filter : sample
+     *
+     *  @access protected
+     *  @param  mixed   $value  Form Input Value
+     *  @return mixed           Converted result.
+     */
+    /*
+    protected function _filter_sample($value)
+    {
+        //  convert to upper case.
+        return strtoupper($value);
+    }
+    */
+}
+
+/**
+ *  user-info action implementation.
+ *
+ *  @author     {$author}
+ *  @access     public
+ *  @package    Sample
+ */
+class Sample_Action_Deletejson extends Sample_ActionClass
+{
+    /**
+     *  preprocess of user-info Action.
+     *
+     *  @access public
+     *  @return string    forward name(null: success.
+     *                                false: in case you want to exit.)
+     */
+    public function prepare()
+    {
+        if($this->af->validate() >0){
+            (new JsonResponse(array('error'=>'bad request'),400))->send();
+            return false;
+        }
+
+        return null;
+    }
+
+    /**
+     *  user-info action implementation.
+     *
+     *  @access public
+     *  @return string  forward name.
+     */
+    public function perform()
+    {
+        $um=new UserManager();
+        $id=$this->af->get('id');
+        $res=$um->userdelete($this->backend,$id);
+        if (Ethna::isError($res)){
+            (new JsonResponse(array('error'=>(string)$res,400)))->send();
+        }else{
+            $userlist=$um->userlist($this->backend);
+            (new JsonResponse(array('users'=>$userlist),200))->send();
+
+        }
+        return null;
+    }
+}

@@ -106,7 +106,7 @@ class UserManager
         if (Ethna::isError($db)) {
             return $db;
         }
-        $list=$db->query("select * from userlist");
+        $list=$db->query("select * from userlist order by id");
         if (Ethna::isError($list)) {
             return $list;
         }
