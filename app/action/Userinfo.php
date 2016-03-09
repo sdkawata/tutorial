@@ -80,10 +80,10 @@ class Sample_Action_Userinfo extends Sample_ActionClass
         $res=$um->isUserExists($this->backend,$id);
         if ($res){
             $url=$um->getIconUrl($id);
-            (new JsonResponse(array('icon_url'=>$url)))->send();
+            (new JsonResponse(array('icon_url'=>$url),200))->send();
 
         }else{
-            (new JsonResponse(array('error'=>'no such user id'),HTTP_BAD_REQUEST))->send();
+            (new JsonResponse(array('error'=>'no such user id'),400))->send();
         }
 
         return null;

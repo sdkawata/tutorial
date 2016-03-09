@@ -2,7 +2,7 @@
   <p>Welcome to Ethnam!</p>
 {if $app.logined}
 {$app.username}-san, Good Morning.<a href="?action_logout=true"> log out </a>
-<a href="/index.php/userlist">user list</a>
+<a href="?action_userlist=true">user list</a>
  
 <a href="?action_changepass=true">change password</a>
  
