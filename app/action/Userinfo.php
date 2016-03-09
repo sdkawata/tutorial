@@ -25,7 +25,7 @@ class Sample_Form_Userinfo extends Sample_ActionForm
     public $form = array(
         'id'=>array(
             'type'=>VAR_TYPE_STRING,
-            'text'=>'userid',
+            'name'=>'userid',
             'required'=>true
         )
     );
@@ -64,6 +64,11 @@ class Sample_Action_Userinfo extends Sample_ActionClass
      */
     public function prepare()
     {
+        if($this->af->validate() >0){
+            (new JsonResponse(array('error'=>'bad request'),400))->send();
+            return false;
+        }
+
         return null;
     }
 
@@ -74,8 +79,7 @@ class Sample_Action_Userinfo extends Sample_ActionClass
      *  @return string  forward name.
      */
     public function perform()
-    {
-        $um=new UserManager();
+    {   $um=new UserManager();
         $id=$this->af->comment=$this->af->get('id');
         $res=$um->isUserExists($this->backend,$id);
         if ($res){
