@@ -58,7 +58,23 @@ class UserManager
         }
         return null;
     }
-
+    public function isUserExists($backend, $userid)
+    {
+        $db=& $backend->getDB();
+        if (Ethna::isError($db)) {
+            return $db;
+        }
+        $list=$db->query("SELECT * FROM userlist WHERE id=?", array($userid));
+        if (Ethna::isError($list)) {
+            return $list;
+        }
+        $item=$list->fetchRow();
+        if ($item) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 
 

@@ -10,7 +10,7 @@ class Sample_Plugin_Filter_ExectimeFilter extends Ethna_Filter
     {
         $this->end=microtime(true);
         $time=$this->end-$this->start;
-        print "\n<div align=\"left\"><a href=\"/\">Home</a></div>";
-        print "\n<div align=\"right\"><i>this page was processed in {$time} s</i></div>";
+        //print "\n<div align=\"left\"><a href=\"/\">Home</a></div>";
+        //print "\n<div align=\"right\"><i>this page was processed in {$time} s</i></div>";
     }
 }

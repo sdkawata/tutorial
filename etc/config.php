@@ -4,11 +4,11 @@
  *
  * update:
  */
-$app = BASE . "/app";
+//$app = BASE . "/app";
 
-set_include_path(implode(PATH_SEPARATOR, array($app)) . PATH_SEPARATOR . get_include_path());
+//set_include_path(implode(PATH_SEPARATOR, array($app)) . PATH_SEPARATOR . get_include_path());
 
-require_once 'SecretConfig.php';
+require_once (dirname(__FILE__) . '/../app/SecretConfig.php');
 
 $config = array(
     // site
