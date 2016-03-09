@@ -1,4 +1,4 @@
-<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
 <script type="text/javascript" src="showiconurl.js"></script>
 <h2>User List</h2>
@@ -15,7 +15,7 @@
 size:{$app.listsize}
 {foreach from=$app.userlist item=item}
 <tr>
-<td>{$item.id}</td>
+<td class="userId">{$item.id}</td>
 <td>{$item.passwd}</td>
 <td>
 <form action="." method="post">
@@ -24,7 +24,7 @@ size:{$app.listsize}
 </form>
 </td>
 <td>
-<input type="button" value="show icon url" onclick="showIconUrl('{$item.id}')">
+<input class="iconUrlButton" data-id="{$item.id}" type="button" value="show icon url">
 </td>
 </td>
 </tr>
