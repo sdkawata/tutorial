@@ -22,8 +22,7 @@ class Sample_Form_BoardDo extends Sample_ActionForm
     public $form = array(
         'uploaded-fileid'=>array(
             'type'=>VAR_TYPE_STRING,
-            'name'=>'userfile',
-            'required'=>true
+            'name'=>'userfile'
         ),
         'content'=>array(
             'type'=>VAR_TYPE_STRING,

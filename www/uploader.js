@@ -125,6 +125,7 @@ Uploader.onUploadSuccess = function(file, key) {
     document.getElementById("uploaded-fileid").value=key;
   //this.countSuccess++;
   this.log('file have been uploaded');
+  $('#filepath').val(file.name)
 };
 
 Uploader.onUploadError = function(file, xhr) {
@@ -144,3 +145,8 @@ Uploader.log = function(msg) {
 };
 
 
+
+// $('input[id=files]').change(function(){
+//     console.log("hoge"+$(this).val())
+//     $('#filepath').val($(this).val());
+// });

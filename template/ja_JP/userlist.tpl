@@ -11,21 +11,19 @@
 </ul>
 {/if}
 
-<table bordercolor="#333333" cellpadding="5" id="userList">
+<table bordercolor="#333333" cellpadding="5" id="userList" class="table-stripped">
 {foreach from=$app.userlist item=item}
 <tr>
 <td class="userId">{$item.id}</td>
 <td>{$item.passwd}</td>
 <td>
-<input type="button" class="deleteButton" value="DELETE!">
+<input type="button" class="deleteButton btn btn-primary" value="DELETE!">
 </td>
 <td>
-<input class="iconUrlButton" type="button" value="show icon url">
+<input class="iconUrlButton btn btn-primary" type="button" value="show icon url">
 </td>
 </td>
 </tr>
 {/foreach}
 </table>
-
-<a href=".">Home</a>
 

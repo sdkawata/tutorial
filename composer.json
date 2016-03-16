@@ -5,6 +5,7 @@
 "smarty/smarty":"2.6.*",
 "aws/aws-sdk-php":"2.7.*",
 "dqneo/s3signer":"v0.2.0",
-"symfony/http-foundation":"v2.4.10"
+"symfony/http-foundation":"v2.4.10",
+"twbs/bootstrap":"v3.3"
 }
 }

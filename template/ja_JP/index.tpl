@@ -1,18 +1,41 @@
-  <h2>Index Page</h2>
-  <p>Welcome to Ethnam!</p>
 {if $app.logined}
-{$app.username}-san, Good Morning.<a href="?action_logout=true"> log out </a>
-<a href="?action_userlist=true">user list</a>
+
+<div class="container">
+<div class="row">
+<div class "col-xs-12 outline">
+<h1>
+{$app.username}-san, Good Morning.</h1>
+</div>
+
+<a href="?action_logout=true" class="btn btn-primary">logout</a>
+<a href="?action_userlist=true" class="btn btn-primary">user list</a>
  
-<a href="?action_changepass=true">change password</a>
+<a href="?action_changepass=true" class="btn btn-primary">change password</a>
  
-<a href="?action_comment=true">send comment</a>
-<a href="?action_imageadd=true"> upload image</a>
-<a href="?action_board=true"> board</a>
-<a href="?action_iconadd=true">iconadd</a>
+<a href="?action_comment=true" class="btn btn-primary">send comment</a>
+<a href="?action_imageadd=true" class="btn btn-primary"> upload image</a>
+<a href="?action_board=true" class="btn btn-primary"> board</a>
+<a href="?action_iconadd=true" class="btn btn-primary">iconadd</a>
 {else}
-<a href="?action_login=true"> log in</a>
-<a href="?action_signup=true"> sign up</a>
+<div class="container">
+<div class="row">
+<div class "col-xs-12 outline">
+<h1>This is test page</h1>
+</div>
+<div class="row">
+<div class="col-xs-6">
+<div class="description">
+If you have an ID, you can login.
+<a href="?action_login=true" class="btn btn-primary"> log in</a>
+</div>
+</div>
+<div class="col-xs-6">
+<div class="description">
+If you do not have an ID, you can sign up for <span class="emph">FREE</span>.
+<a href="?action_signup=true" class="btn btn-primary"> sign up</a>
+</div>
+</div>
+</div>
 {/if}
 <br>
 today's picture
